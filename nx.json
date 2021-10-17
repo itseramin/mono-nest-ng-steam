@@ -1,0 +1,48 @@
+{
+  "npmScope": "mono-nest-ng-steam",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "nest-api": {
+      "tags": []
+    },
+    "ng-steam": {
+      "tags": []
+    },
+    "ng-steam-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "ng-steam"
+      ]
+    }
+  }
+}
