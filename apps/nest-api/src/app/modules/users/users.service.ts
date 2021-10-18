@@ -34,8 +34,4 @@ export class UsersService {
   findOne(id: string): Promise<User> {
     return this.usersRepository.findUserById(id);
   }
-
-  // update(id: string, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
 }

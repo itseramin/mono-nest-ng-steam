@@ -1,16 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-steam';
 
 import { AuthService } from '../auth.service';
-import { UsersService } from '../../modules/users/users.service';
 
 @Injectable()
 export class SteamStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly usersService: UsersService
-  ) {
+  constructor(private readonly authService: AuthService) {
     super({
       returnURL: 'http://localhost:3000/api/v1/auth/steam/return',
       realm: 'http://localhost:3000/',

@@ -3,17 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './routes/home/home.component';
 import { FourzerofourComponent } from './routes/fourzerofour/fourzerofour.component';
+import { AuthcallbackComponent } from './components/authcallback/authcallback.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: { title: $localize`:@@homeTitle:Home | Angular Playground` },
+    data: { title: $localize`:@@homeTitle:Home | mono-nest-ng-steam` },
+  },
+  {
+    path: 'auth/callback',
+    component: AuthcallbackComponent,
+    data: { title: 'Redirecting... | mono-nest-ng-steam' },
   },
   {
     path: '404',
     component: FourzerofourComponent,
-    data: { title: $localize`:@@fourZeroFourTitle:404 | Angular Playground` },
+    data: { title: $localize`:@@fourZeroFourTitle:404 | mono-nest-ng-steam` },
   },
   {
     path: '**',

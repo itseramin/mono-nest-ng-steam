@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Header,
   Patch,
   Param,
   Req,
@@ -26,11 +27,16 @@ export class AuthController {
   @Get('steam/return')
   @UseGuards(SteamAuthGuard)
   async steamLoginCallback(@Req() req, @Res() res) {
-    console.log(req.user, await this.authService.login(req.user));
-    res.redirect('/');
+    const token = await this.authService.login(req.user);
+    console.log(req.user, token);
+    res.redirect(
+      `http://localhost:4200/auth/callback/?token=${token.JWTToken}`
+    );
   }
 
   @Get('validate')
   @UseGuards(JwtAuthGuard)
-  validateByJWT() {}
+  validateByJWT() {
+    return 'nice';
+  }
 }
