@@ -12,7 +12,7 @@ export class AuthcallbackComponent implements OnInit {
   ngOnInit(): void {
     const token = this.route.snapshot.queryParamMap.get('token');
     console.log(token);
-
+    // save token to local storage and stuff like that
     this.router.navigate(['/']);
   }
 }
