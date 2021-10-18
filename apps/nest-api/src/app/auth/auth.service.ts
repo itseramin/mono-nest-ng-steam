@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UsersService } from '../modules/users/users.service';
 import { JwtService } from '@nestjs/jwt';
+
+import { UsersService } from '../modules/users/users.service';
 import { User } from '../modules/users/entities/user.entity';
 
 @Injectable()
@@ -10,16 +11,11 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  async validateUser(
-    identifier: string,
-    profile: any,
-    done: any
-  ): Promise<any> {
-    const user = await this.usersService.findUserBySteamId64(profile.id);
-    if (user && user.steamId64 === profile.id) {
-      return user;
-    }
-    return null;
+  async validateUser(profile: any): Promise<any> {
+    return (
+      (await this.usersService.findUserBySteamId64(profile.id)) ??
+      (await this.usersService.registerUser(profile))
+    );
   }
 
   async login(user: User) {
@@ -28,7 +24,7 @@ export class AuthService {
       steamId64: user.steamId64,
     };
     return {
-      access_token: this.jwtService.sign(payload),
+      JWTToken: this.jwtService.sign(payload),
     };
   }
 }

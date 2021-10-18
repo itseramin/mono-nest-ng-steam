@@ -5,11 +5,10 @@ import {
   Body,
   Patch,
   Param,
-  Request,
+  Req,
   Res,
   Delete,
   UseGuards,
-  Redirect,
 } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
@@ -26,8 +25,12 @@ export class AuthController {
 
   @Get('steam/return')
   @UseGuards(SteamAuthGuard)
-  async steamLoginCallback(@Request() req, @Res() res) {
+  async steamLoginCallback(@Req() req, @Res() res) {
     console.log(req.user, await this.authService.login(req.user));
     res.redirect('/');
   }
+
+  @Get('validate')
+  @UseGuards(JwtAuthGuard)
+  validateByJWT() {}
 }
