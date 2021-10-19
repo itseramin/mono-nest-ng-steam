@@ -6,9 +6,9 @@ import {
 } from 'typeorm';
 
 export enum UserRole {
-  ADMIN = -1,
-  DEFAULT = 0,
-  PROMO = 1,
+  ADMIN = 'ADMIN',
+  DEFAULT = 'DEFAULT',
+  PROMO = 'PROMO',
 }
 
 @Entity()

@@ -1,15 +1,26 @@
 <header>
   <mat-toolbar>
-    <span>My App</span>
+    <nav>
+      <span class="btn-empty">My App</span>
+    </nav>
     <span class="example-spacer"></span>
     <button
       aria-label="Sign in through Steam."
-      class="btn-sits"
+      class="btn-empty"
       (click)="login()"
+      *ngIf="authService.isLoggedOut()"
     >
       <img
         src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"
       />
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="logout()"
+      *ngIf="authService.isLoggedIn()"
+    >
+      LogOut
     </button>
   </mat-toolbar>
 </header>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule, Meta, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -35,6 +36,11 @@ import { AuthcallbackComponent } from './components/authcallback/authcallback.co
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('jwt'),
+      },
+    }),
   ],
   providers: [Meta, Title],
   bootstrap: [AppComponent],

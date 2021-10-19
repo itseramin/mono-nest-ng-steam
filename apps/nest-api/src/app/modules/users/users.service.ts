@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { User } from './entities/user.entity';
+import { User, UserRole } from './entities/user.entity';
 
 import { UsersRepository } from './users.repository';
 
@@ -18,7 +18,7 @@ export class UsersService {
     user.steamId64 = profile.id;
     user.username = profile.displayName;
     user.steamPfp = profile.photos[1].value;
-    user.role = 0;
+    user.role = UserRole.DEFAULT;
 
     return await this.usersRepository.save(user);
   }
