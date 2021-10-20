@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
+import { SteamAPIService } from '../../services/steamapi/steamapi.service';
 
 import { User, UserRole } from './entities/user.entity';
 
@@ -9,6 +10,7 @@ import { UsersRepository } from './users.repository';
 @Injectable()
 export class UsersService {
   constructor(
+    private readonly steamAPIServices: SteamAPIService,
     @InjectRepository(UsersRepository)
     private readonly usersRepository: UsersRepository
   ) {}
@@ -27,8 +29,9 @@ export class UsersService {
     return this.usersRepository.findUsersTopThree();
   }
 
-  findUserBySteamId64(steamId64: string): Promise<User> {
-    return this.usersRepository.findUserBySteamId64(steamId64);
+  async findUserBySteamId64(steamId64: string): Promise<User> {
+    console.log(await this.steamAPIServices.canUserRegister(steamId64));
+    return await this.usersRepository.findUserBySteamId64(steamId64);
   }
 
   findOne(id: string): Promise<User> {

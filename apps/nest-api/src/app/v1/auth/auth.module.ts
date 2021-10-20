@@ -7,11 +7,13 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { SteamStrategy } from './strategies/steam.strategy';
 import { AuthController } from './auth.controller';
 import { UsersService } from '../modules/users/users.service';
+import { SteamAPIModule } from '../services/steamapi/steamapi.module';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
+    SteamAPIModule,
     JwtModule.register({
       secret: 'bigsecret',
       signOptions: { expiresIn: '300s' },

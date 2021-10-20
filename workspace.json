@@ -1,6 +1,28 @@
 {
   "version": 2,
   "projects": {
+    "dtos": {
+      "root": "libs/dtos",
+      "sourceRoot": "libs/dtos/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/dtos/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dtos"],
+          "options": {
+            "jestConfig": "libs/dtos/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "nest-api": {
       "root": "apps/nest-api",
       "sourceRoot": "apps/nest-api/src",
@@ -8,16 +30,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/nest-api",
             "main": "apps/nest-api/src/main.ts",
             "tsConfig": "apps/nest-api/tsconfig.app.json",
-            "assets": [
-              "apps/nest-api/src/assets"
-            ]
+            "assets": ["apps/nest-api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -41,20 +59,14 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "apps/nest-api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/nest-api/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/nest-api"
-          ],
+          "outputs": ["coverage/apps/nest-api"],
           "options": {
             "jestConfig": "apps/nest-api/jest.config.js",
             "passWithNoTests": true
@@ -70,9 +82,7 @@
       "targets": {
         "build": {
           "executor": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/ng-steam",
             "index": "apps/ng-steam/src/index.html",
@@ -154,9 +164,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/ng-steam"
-          ],
+          "outputs": ["coverage/apps/ng-steam"],
           "options": {
             "jestConfig": "apps/ng-steam/jest.config.js",
             "passWithNoTests": true
@@ -183,13 +191,9 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "apps/ng-steam-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/ng-steam-e2e/**/*.{js,ts}"]
           }
         }
       }

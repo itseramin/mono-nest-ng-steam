@@ -4,14 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { getMetadataArgsStorage } from 'typeorm';
 
 import { UsersModule } from './modules/users/users.module';
-import { MarketModule } from './modules/market/market.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
-    MarketModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

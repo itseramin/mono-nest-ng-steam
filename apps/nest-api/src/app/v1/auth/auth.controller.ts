@@ -16,7 +16,7 @@ import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { SteamAuthGuard } from './guards/steam-auth.guard';
 
-@Controller('v1/auth')
+@Controller({ path: 'auth', version: '1' })
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
