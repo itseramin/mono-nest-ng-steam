@@ -16,14 +16,16 @@ export class SteamAPIInvService {
     const data = (await lastValueFrom(this.httpService.get<any>(url))).data
       .rgDescriptions;
 
-    const items: ItemCached[] = (<any>Object.values(data)).map((i) => {
-      const item = new ItemCached();
-      item.img = i.icon_url_large || i.icon_url;
-      item.name = i.name;
-      item.user = user;
+    let items: ItemCached[] = (<any>Object.values(data))
+      .filter((i) => i.tradable === 1 && i.marketable === 1)
+      .map((i) => {
+        const item = new ItemCached();
+        item.img = i.icon_url_large || i.icon_url;
+        item.name = i.name;
+        item.user = user;
 
-      return item;
-    });
+        return item;
+      });
 
     return items;
   }

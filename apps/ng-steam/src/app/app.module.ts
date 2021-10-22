@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthcallbackComponent } from './components/authcallback/authcallback.component';
+import { SellComponent } from './routes/sell/sell.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AuthcallbackComponent } from './components/authcallback/authcallback.co
     HomeComponent,
     FourzerofourComponent,
     AuthcallbackComponent,
+    SellComponent,
   ],
   imports: [
     AppRoutingModule,

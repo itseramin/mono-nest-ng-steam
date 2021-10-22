@@ -9,12 +9,7 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  items: any;
-
   constructor(public httpService: HttpService) {}
 
-  async ngOnInit(): Promise<void> {
-    let is = await this.httpService.getInventory();
-    this.items = is;
-  }
+  async ngOnInit(): Promise<void> {}
 }
