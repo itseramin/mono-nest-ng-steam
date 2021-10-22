@@ -1,2 +1,6 @@
 <p>home works!</p>
-<div></div>
+<div *ngFor="let i of items">
+  <img
+    src="http://steamcommunity-a.akamaihd.net/economy/image/{{ i.icon_url }}"
+  />
+</div>

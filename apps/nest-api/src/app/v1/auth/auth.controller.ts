@@ -1,20 +1,12 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Header,
-  Patch,
-  Param,
-  Req,
-  Res,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Res, UseGuards } from '@nestjs/common';
 
-import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { SteamAuthGuard } from './guards/steam-auth.guard';
+
+import { AuthService } from './auth.service';
+
+import { User } from '../modules/users/entities/user.entity';
+import { ReqUser } from '../decorators/requser.paramdecorator';
 
 @Controller({ path: 'auth', version: '1' })
 export class AuthController {
@@ -26,17 +18,13 @@ export class AuthController {
 
   @Get('steam/return')
   @UseGuards(SteamAuthGuard)
-  async steamLoginCallback(@Req() req, @Res() res) {
-    const token = await this.authService.login(req.user);
-    console.log(req.user, token);
+  async steamLoginCallback(@ReqUser() user: User, @Res() res) {
+    const token = await this.authService.login(user);
+
+    // TODO: logic if user doesnt return token (already registered from same IP)
+
     res.redirect(
       `http://localhost:4200/auth/callback/?token=${token.JWTToken}`
     );
-  }
-
-  @Get('validate')
-  @UseGuards(JwtAuthGuard)
-  validateByJWT() {
-    return 'nice';
   }
 }

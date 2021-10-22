@@ -22,6 +22,7 @@ export class AuthService {
     const payload = {
       sub: user.id,
       steamId64: user.steamId64,
+      role: user.role,
     };
     return {
       JWTToken: this.jwtService.sign(payload),

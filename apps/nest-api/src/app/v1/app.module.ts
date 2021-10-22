@@ -5,6 +5,7 @@ import { getMetadataArgsStorage } from 'typeorm';
 
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { InventoryModule } from './modules/inventory/inventory.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
       entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
     }),
     UsersModule,
+    InventoryModule,
   ],
   controllers: [],
   providers: [],

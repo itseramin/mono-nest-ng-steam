@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
 export class SteamStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
     super({
-      returnURL: 'http://localhost:3000/api/v1/auth/steam/return',
+      returnURL: 'http://localhost:3000/api/v1/auth/steam/return', // TODO: .env file maybe or dynamic config depending on build type(?)
       realm: 'http://localhost:3000/',
       apiKey: `${process.env.STEAM_API_KEY}`,
     });

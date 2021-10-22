@@ -18,11 +18,20 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   public getAllUser() {
-    return this.http
-      .get<Promise<any>>(
+    return lastValueFrom(
+      this.http.get<Promise<any>>(
         'http://localhost:3000/api/v1/users/',
         this.httpOptions
       )
-      .toPromise();
+    );
+  }
+
+  public async getInventory(): Promise<any> {
+    return lastValueFrom(
+      this.http.get<Promise<any>>('http://localhost:3000/api/v1/inventory', {
+        ...this.httpOptions,
+        observe: 'body',
+      })
+    );
   }
 }

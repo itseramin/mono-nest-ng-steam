@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { UsersService } from './users.service';
@@ -19,7 +10,7 @@ export class UsersController {
   @Get()
   @UseGuards(JwtAuthGuard)
   findUsersTopTree() {
-    return this.usersService.findUsersTopThree();
+    return 'yes';
   }
 
   @Get(':id')

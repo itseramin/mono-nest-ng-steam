@@ -4,20 +4,11 @@ import { User } from './entities/user.entity';
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
-  findUserById(id: string) {
-    return this.findOne(id);
+  async findUserById(id: string): Promise<User> {
+    return await this.findOne(id);
   }
 
-  findUserBySteamId64(steamId64: string) {
-    return this.findOne({ steamId64: steamId64 });
-  }
-
-  findUsersTopThree() {
-    return this.find({
-      order: {
-        balance: 'ASC',
-      },
-      take: 3,
-    });
+  async findUserBySteamId64(steamId64: string): Promise<User> {
+    return await this.findOne({ steamId64: steamId64 });
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -8,9 +9,13 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  items: any;
+
   constructor(public httpService: HttpService) {}
 
   async ngOnInit(): Promise<void> {
     console.log(await this.httpService.getAllUser());
+    let is = await this.httpService.getInventory();
+    this.items = Object.values(is);
   }
 }
