@@ -11,7 +11,7 @@ export class LoginService {
     private readonly loginRepository: LoginRepository
   ) {}
 
-  async saveLogin(loginData: any): Promise<Login> {
+  async newLogin(loginData: any): Promise<Login> {
     return await this.loginRepository.save(loginData);
   }
 

@@ -6,6 +6,7 @@ import { getMetadataArgsStorage } from 'typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
+import { LoginModule } from './modules/logins/login.module';
 
 @Module({
   imports: [
@@ -19,9 +20,11 @@ import { InventoryModule } from './modules/inventory/inventory.module';
       password: 'password',
       database: 'steam-playground',
       synchronize: true,
-      entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
+      // entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
+      autoLoadEntities: true,
     }),
     UsersModule,
+    LoginModule,
     InventoryModule,
   ],
   controllers: [],

@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
 
 import { User, UserRole } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(UsersRepository)
-    private readonly usersRepository: UsersRepository
-  ) {}
+  private usersRepository: UsersRepository;
+
+  constructor(private readonly connection: Connection) {
+    this.usersRepository = this.connection.getCustomRepository(UsersRepository);
+  }
 
   async registerUser(profile: any): Promise<User> {
     let user = new User();

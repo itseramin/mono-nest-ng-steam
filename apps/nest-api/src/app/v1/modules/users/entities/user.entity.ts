@@ -59,7 +59,7 @@ export class User {
   itemsCached: ItemCached[];
 
   @Column({ nullable: true })
-  lastInvFetch?: Date;
+  lastInvFetch: Date;
 
   @CreateDateColumn()
   registeredAt: Date;

@@ -16,6 +16,9 @@ export class ItemCached {
   @Column()
   name: string;
 
+  @Column()
+  img: string;
+
   @ManyToOne((type) => User, (user) => user.itemsCached)
   user: User;
 }

@@ -14,8 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(public httpService: HttpService) {}
 
   async ngOnInit(): Promise<void> {
-    console.log(await this.httpService.getAllUser());
     let is = await this.httpService.getInventory();
-    this.items = Object.values(is);
+    this.items = is;
   }
 }

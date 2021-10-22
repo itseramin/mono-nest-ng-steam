@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -8,7 +9,7 @@ import { LoginService } from './login.service';
 
 @Module({
   exports: [TypeOrmModule],
-  imports: [TypeOrmModule.forFeature([Login, LoginRepository])],
+  imports: [TypeOrmModule.forFeature([Login, LoginRepository]), HttpModule],
   providers: [LoginService, SteamAPIInvService],
 })
 export class LoginModule {}

@@ -14,8 +14,8 @@ export class Item {
   id: string;
 
   @Column()
-  username: string;
+  name: string;
 
-  @ManyToOne((type) => User, (user) => user.itemsCached)
+  @ManyToOne((type) => User, (user) => user.items)
   user: User;
 }

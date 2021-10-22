@@ -8,15 +8,25 @@ import { Roles } from '../../decorators/roles.decorator';
 import { User, UserRole } from '../users/entities/user.entity';
 
 import { SteamAPIInvService } from '../../services/steamapi/inventory/steamapi-inv.service';
+import { InventoryService } from './inventory.service';
 
 @Controller({ path: 'inventory', version: '1' })
 export class InventoryController {
-  constructor(private readonly steamAPIInvServices: SteamAPIInvService) {}
+  constructor(
+    private readonly inventoryServices: InventoryService,
+    private readonly steamAPIInvServices: SteamAPIInvService
+  ) {}
 
   @Get()
   @UseGuards(JwtAuthGuard)
   @Roles(UserRole.DEFAULT)
   getInventoryOfUser(@ReqUser() user: User) {
-    return this.steamAPIInvServices.getInventoryOfUser(user.steamId64);
+    return this.inventoryServices.getInventoryOfUser(user);
+  }
+
+  @Get('fetch')
+  @UseGuards(JwtAuthGuard)
+  fetchInventoryOfUser(@ReqUser() user: User) {
+    return this.inventoryServices.fetchInventoryOfUser(user);
   }
 }

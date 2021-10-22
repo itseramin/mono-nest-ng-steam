@@ -30,7 +30,6 @@ export class HttpService {
     return lastValueFrom(
       this.http.get<Promise<any>>('http://localhost:3000/api/v1/inventory', {
         ...this.httpOptions,
-        observe: 'body',
       })
     );
   }
