@@ -7,12 +7,12 @@ import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
 import { UsersService } from './users.service';
 
-import { SteamAPIInvService } from '../../services/steamapi/inventory/steamapi-inv.service';
+import { SteamAPIAuthService } from '../../services/steamapi/auth/steamapi-auth.service';
 
 @Module({
   controllers: [UsersController],
   exports: [TypeOrmModule],
   imports: [TypeOrmModule.forFeature([User, UsersRepository]), HttpModule],
-  providers: [UsersService, SteamAPIInvService],
+  providers: [UsersService, SteamAPIAuthService],
 })
 export class UsersModule {}

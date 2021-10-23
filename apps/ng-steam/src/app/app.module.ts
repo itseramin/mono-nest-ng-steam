@@ -8,27 +8,27 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { AuthcallbackComponent } from './components/authcallback/authcallback.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { HomeComponent } from './routes/home/home.component';
+import { ExchangeComponent } from './routes/exchange/exchange.component';
 import { FourzerofourComponent } from './routes/fourzerofour/fourzerofour.component';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthcallbackComponent } from './components/authcallback/authcallback.component';
-import { SellComponent } from './routes/sell/sell.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthcallbackComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    ExchangeComponent,
     FourzerofourComponent,
-    AuthcallbackComponent,
-    SellComponent,
   ],
   imports: [
     AppRoutingModule,

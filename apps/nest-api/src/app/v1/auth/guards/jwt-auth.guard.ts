@@ -16,15 +16,15 @@ export class JwtAuthGuard extends AuthGuard('jwt') implements CanActivate {
       return false;
     }
 
+    const { user } = await executionContext.switchToHttp().getRequest();
+    if (!user) return false;
+
     const roles =
       this.reflector.getAllAndMerge<UserRole[]>('roles', [
         executionContext.getClass(), // whole controller
         executionContext.getHandler(), // only requests/paths
       ]) || [];
     if (!roles.length) return true;
-
-    const { user } = await executionContext.switchToHttp().getRequest();
-    if (!user) return false;
 
     return roles.some((role) => {
       return role === user.role;

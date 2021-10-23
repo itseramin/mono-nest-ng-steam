@@ -1,27 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
 import { DateTime, Interval } from 'luxon';
 
 import { User } from '../users/entities/user.entity';
+import { UsersRepository } from '../users/users.repository';
 import { ItemCached } from './entities/item-cached.entity';
 import { ItemCachedRepository } from './repositories/item-cached.repository';
 
 import { SteamAPIInvService } from '../../services/steamapi/inventory/steamapi-inv.service';
 
-import { ResponseBase } from '@mono-nest-ng-steam/dtos';
-import { Error } from 'libs/dtos/src/lib/miscs/error.class';
-import { UsersRepository } from '../users/users.repository';
-import { Connection } from 'typeorm';
+import { Error, ResponseBase } from '@mono-nest-ng-steam/dtos';
 
 @Injectable()
 export class InventoryService {
+  private itemCachedRepository: ItemCachedRepository;
   private usersRepository: UsersRepository;
+
   constructor(
-    @InjectRepository(ItemCachedRepository)
-    private readonly itemCachedRepository: ItemCachedRepository,
-    private readonly steamAPIINVService: SteamAPIInvService,
-    private readonly connection: Connection
+    private readonly connection: Connection,
+    private readonly steamAPIINVService: SteamAPIInvService
   ) {
+    this.itemCachedRepository =
+      this.connection.getCustomRepository(ItemCachedRepository);
     this.usersRepository = this.connection.getCustomRepository(UsersRepository);
   }
 

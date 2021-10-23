@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './routes/home/home.component';
 import { FourzerofourComponent } from './routes/fourzerofour/fourzerofour.component';
 import { AuthcallbackComponent } from './components/authcallback/authcallback.component';
-import { SellComponent } from './routes/sell/sell.component';
+import { ExchangeComponent } from './routes/exchange/exchange.component';
 
 const routes: Routes = [
   {
@@ -13,14 +13,24 @@ const routes: Routes = [
     data: { title: $localize`:@@homeTitle:Home | mono-nest-ng-steam` },
   },
   {
-    path: 'sell',
-    component: SellComponent,
-    data: { title: $localize`:@@sellTitle:Sell | mono-nest-ng-steam` },
+    path: 'exchange',
+    component: ExchangeComponent,
+    data: { title: $localize`:@@sellTitle:Exchange | mono-nest-ng-steam` },
   },
   {
-    path: 'auth/callback',
-    component: AuthcallbackComponent,
-    data: { title: 'Redirecting... | mono-nest-ng-steam' },
+    path: 'auth',
+    children: [
+      {
+        path: 'callback',
+        component: AuthcallbackComponent,
+        data: { title: 'Redirecting... | mono-nest-ng-steam' },
+      },
+      {
+        path: 'requirementsnotmet',
+        component: AuthcallbackComponent,
+        data: { title: ':( | mono-nest-ng-steam' },
+      },
+    ],
   },
   {
     path: '404',

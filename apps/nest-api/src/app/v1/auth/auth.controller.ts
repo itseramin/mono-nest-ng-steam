@@ -18,13 +18,7 @@ export class AuthController {
 
   @Get('steam/return')
   @UseGuards(SteamAuthGuard)
-  async steamLoginCallback(@ReqUser() user: User, @Res() res) {
-    const token = await this.authService.login(user);
-
-    // TODO: logic if user doesnt return token (already registered from same IP)
-
-    res.redirect(
-      `http://localhost:4200/auth/callback/?token=${token.JWTToken}`
-    );
+  steamLoginCallback(@ReqUser() user: User, @Res() res) {
+    this.authService.handleLogin(user, res);
   }
 }

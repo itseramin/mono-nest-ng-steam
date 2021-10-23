@@ -8,7 +8,7 @@
       aria-label="Sign in through Steam."
       class="btn-empty"
       (click)="login()"
-      *ngIf="this.authService.isLoggedOut()"
+      *ngIf="!this.loggedIn"
     >
       <img
         src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"
@@ -18,7 +18,7 @@
       mat-raised-button
       color="primary"
       (click)="logout()"
-      *ngIf="this.authService.isLoggedIn()"
+      *ngIf="this.loggedIn"
     >
       LogOut
     </button>

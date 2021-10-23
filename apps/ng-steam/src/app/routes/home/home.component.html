@@ -1,1 +1,5 @@
-<p>home works!</p>
+<div *ngIf="user">
+  <h1>Hi {{ user.username }}!</h1>
+  <img src="{{ user.steamPfp }}" />
+  <span>{{ user.steamId64 }}</span>
+</div>

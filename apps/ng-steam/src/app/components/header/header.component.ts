@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -9,9 +9,22 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  loggedIn: boolean = false;
+
   constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {}
+  @HostListener('window:focus')
+  checkLogInStatus() {
+    this.checkLogin();
+  }
+
+  ngOnInit(): void {
+    this.checkLogin();
+  }
+
+  checkLogin() {
+    this.loggedIn = this.authService.isLoggedIn();
+  }
 
   login() {
     window.location.href = 'http://localhost:3000/api/v1/auth/steam';
@@ -19,5 +32,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.checkLogin();
   }
 }

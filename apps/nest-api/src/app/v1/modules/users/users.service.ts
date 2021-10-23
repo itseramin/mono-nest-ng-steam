@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
+import { SteamAPIAuthService } from '../../services/steamapi/auth/steamapi-auth.service';
 
 import { User, UserRole } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
@@ -9,11 +10,16 @@ import { UsersRepository } from './users.repository';
 export class UsersService {
   private usersRepository: UsersRepository;
 
-  constructor(private readonly connection: Connection) {
+  constructor(
+    private readonly steamAPIAuthService: SteamAPIAuthService,
+    private readonly connection: Connection
+  ) {
     this.usersRepository = this.connection.getCustomRepository(UsersRepository);
   }
 
   async registerUser(profile: any): Promise<User> {
+    if (!this.steamAPIAuthService.canUserRegister(profile.id)) return null;
+
     let user = new User();
     user.steamId64 = profile.id;
     user.username = profile.displayName;
@@ -23,11 +29,11 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  async findUserBySteamId64(steamId64: string): Promise<User> {
-    return await this.usersRepository.findUserBySteamId64(steamId64);
+  async findUserById(id: string): Promise<User> {
+    return await this.usersRepository.findOne(id);
   }
 
-  findOne(id: string): Promise<User> {
-    return this.usersRepository.findUserById(id);
+  async findUserBySteamId64(steamId64: string): Promise<User> {
+    return await this.usersRepository.findUserBySteamId64(steamId64);
   }
 }

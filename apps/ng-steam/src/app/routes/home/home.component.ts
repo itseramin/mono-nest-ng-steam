@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
-import { HttpService } from '../../services/http.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
-  providers: [HttpService],
+  providers: [ApiService],
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(public httpService: HttpService) {}
+  user: any = {
+    username: 'username',
+    steamPfp:
+      'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/b5/b5bd56c1aa4644a474a2e4972be27ef9e82e517e_full.jpg',
+    steamId64: '789574XXXXXXX',
+  };
+  constructor(public apiService: ApiService) {}
 
-  async ngOnInit(): Promise<void> {}
+  async ngOnInit(): Promise<any> {
+    this.user = await this.apiService.getUserProfile();
+  }
 }

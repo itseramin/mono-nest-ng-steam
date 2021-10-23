@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject } from 'rxjs';
 
 @Injectable()
 export class AuthService {

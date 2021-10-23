@@ -7,26 +7,23 @@ import { Roles } from '../../decorators/roles.decorator';
 
 import { User, UserRole } from '../users/entities/user.entity';
 
-import { SteamAPIInvService } from '../../services/steamapi/inventory/steamapi-inv.service';
 import { InventoryService } from './inventory.service';
 
+import { ResponseBase } from '@mono-nest-ng-steam/dtos';
+
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'inventory', version: '1' })
 export class InventoryController {
-  constructor(
-    private readonly inventoryServices: InventoryService,
-    private readonly steamAPIInvServices: SteamAPIInvService
-  ) {}
+  constructor(private readonly inventoryServices: InventoryService) {}
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   @Roles(UserRole.DEFAULT)
   getInventoryOfUser(@ReqUser() user: User) {
     return this.inventoryServices.getInventoryOfUser(user);
   }
 
   @Get('fetch')
-  @UseGuards(JwtAuthGuard)
-  fetchInventoryOfUser(@ReqUser() user: User) {
+  fetchInventoryOfUser(@ReqUser() user: User): Promise<ResponseBase> {
     return this.inventoryServices.fetchInventoryOfUser(user);
   }
 }

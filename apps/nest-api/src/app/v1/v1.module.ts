@@ -10,8 +10,6 @@ import { LoginModule } from './modules/logins/login.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    AuthModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -23,11 +21,12 @@ import { LoginModule } from './modules/logins/login.module';
       // entities: getMetadataArgsStorage().tables.map((tbl) => tbl.target),
       autoLoadEntities: true,
     }),
-    UsersModule,
-    LoginModule,
+    AuthModule,
     InventoryModule,
+    LoginModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class V1Module {}
