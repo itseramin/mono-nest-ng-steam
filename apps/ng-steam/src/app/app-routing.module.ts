@@ -5,6 +5,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { FourzerofourComponent } from './routes/fourzerofour/fourzerofour.component';
 import { AuthcallbackComponent } from './components/authcallback/authcallback.component';
 import { ExchangeComponent } from './routes/exchange/exchange.component';
+import { RequirementsnotmetComponent } from './routes/requirementsnotmet/requirementsnotmet.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'requirementsnotmet',
-        component: AuthcallbackComponent,
+        component: RequirementsnotmetComponent,
         data: { title: ':( | mono-nest-ng-steam' },
       },
     ],

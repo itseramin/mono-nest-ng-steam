@@ -1,12 +1,10 @@
-import { Controller, Get, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { SteamAuthGuard } from './guards/steam-auth.guard';
 
 import { AuthService } from './auth.service';
-
-import { User } from '../modules/users/entities/user.entity';
 import { ReqUser } from '../decorators/requser.paramdecorator';
+import { User } from '../modules/users/entities/user.entity';
 
 @Controller({ path: 'auth', version: '1' })
 export class AuthController {
@@ -14,11 +12,11 @@ export class AuthController {
 
   @Get('steam')
   @UseGuards(SteamAuthGuard)
-  steamLogin() {}
+  steamLogin() {} // Calls Steam strategy
 
   @Get('steam/return')
   @UseGuards(SteamAuthGuard)
-  steamLoginCallback(@ReqUser() user: User, @Res() res) {
+  steamLoginCallback(@ReqUser() user: User | null, @Res() res) {
     this.authService.handleLogin(user, res);
   }
 }

@@ -1,15 +1,15 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { UsersModule } from '../modules/users/users.module';
+
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { SteamStrategy } from './strategies/steam.strategy';
 import { AuthController } from './auth.controller';
 import { UsersService } from '../modules/users/users.service';
-import { SteamAPIAuthService } from '../services/steamapi/auth/steamapi-auth.service';
-import { HttpModule } from '@nestjs/axios';
-import { SteamAPIInvService } from '../services/steamapi/inventory/steamapi-inv.service';
+import { SteamAPIAuthService } from '../services/steamapi/steamapi-auth.service';
+import { SteamAPIInvService } from '../services/steamapi/steamapi-inv.service';
 import { UsersRepository } from '../modules/users/users.repository';
 
 @Module({

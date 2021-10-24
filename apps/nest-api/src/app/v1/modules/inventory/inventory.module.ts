@@ -1,7 +1,7 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SteamAPIInvService } from '../../services/steamapi/inventory/steamapi-inv.service';
+import { SteamAPIInvService } from '../../services/steamapi/steamapi-inv.service';
 import { UsersRepository } from '../users/users.repository';
 import { ItemCached } from './entities/item-cached.entity';
 import { Item } from './entities/item.entity';

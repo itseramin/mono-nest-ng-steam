@@ -15,9 +15,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    return await this.authServices.jwtValidation(payload.sub); // TODO: sophisticated method in authservice
+    return await this.authServices.jwtValidation(payload.sub);
   }
-
   // handleRequest(err, user, info: Error) {
   //   // TODO: custom 401 error when unauthenticated
   //   return user;

@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { DateTime, Interval } from 'luxon';
 import { lastValueFrom } from 'rxjs';
 
-import { Config } from './config';
+import { Config } from './auth.config';
 
 @Injectable()
 export class SteamAPIAuthService {
@@ -47,7 +47,7 @@ export class SteamAPIAuthService {
   private async isUserAccountTradeOrVACBanned(): Promise<boolean> {
     const url = `https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key=${process.env.STEAM_API_KEY}&steamids=${this.steamId}`;
 
-    const data = (await lastValueFrom(this.httpService.get<any>(url))).data; // retard Valve lmao where response property
+    const data = (await lastValueFrom(this.httpService.get<any>(url))).data; // Retarded Valve devs, no response property
     if (!data) return true;
 
     const user = data.players[0];

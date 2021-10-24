@@ -7,7 +7,7 @@ import { UsersController } from './users.controller';
 import { UsersRepository } from './users.repository';
 import { UsersService } from './users.service';
 
-import { SteamAPIAuthService } from '../../services/steamapi/auth/steamapi-auth.service';
+import { SteamAPIAuthService } from '../../services/steamapi/steamapi-auth.service';
 
 @Module({
   controllers: [UsersController],

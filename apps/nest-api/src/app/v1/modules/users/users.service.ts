@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
-import { SteamAPIAuthService } from '../../services/steamapi/auth/steamapi-auth.service';
 
 import { User, UserRole } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
@@ -10,16 +8,11 @@ import { UsersRepository } from './users.repository';
 export class UsersService {
   private usersRepository: UsersRepository;
 
-  constructor(
-    private readonly steamAPIAuthService: SteamAPIAuthService,
-    private readonly connection: Connection
-  ) {
+  constructor(private readonly connection: Connection) {
     this.usersRepository = this.connection.getCustomRepository(UsersRepository);
   }
 
   async registerUser(profile: any): Promise<User> {
-    if (!this.steamAPIAuthService.canUserRegister(profile.id)) return null;
-
     let user = new User();
     user.steamId64 = profile.id;
     user.username = profile.displayName;

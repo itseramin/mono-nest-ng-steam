@@ -8,7 +8,7 @@ import { UsersRepository } from '../users/users.repository';
 import { ItemCached } from './entities/item-cached.entity';
 import { ItemCachedRepository } from './repositories/item-cached.repository';
 
-import { SteamAPIInvService } from '../../services/steamapi/inventory/steamapi-inv.service';
+import { SteamAPIInvService } from '../../services/steamapi/steamapi-inv.service';
 
 import { Error, ResponseBase } from '@mono-nest-ng-steam/dtos';
 
@@ -34,16 +34,17 @@ export class InventoryService {
     const res = new ResponseBase();
     res.err = new Error();
 
-    res.err.code = 'inventory_fetch_time';
-    res.err.message = 'Try again in 5 minutes...';
-
     if (user.lastInvFetch) {
       const minutesFromLastTime = Interval.fromDateTimes(
         DateTime.fromJSDate(user.lastInvFetch),
         DateTime.now()
       ).length('minutes');
 
-      if (minutesFromLastTime < 5) return res;
+      if (minutesFromLastTime < 5) {
+        res.err.code = 'inventory_fetch_time';
+        res.err.message = 'Try again in 5 minutes...';
+        return res;
+      }
     }
 
     let items = await this.steamAPIINVService.getInventoryOfUser(user);

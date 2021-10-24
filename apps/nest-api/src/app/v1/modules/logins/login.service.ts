@@ -18,8 +18,4 @@ export class LoginService {
   async getAllLoginsOfIp(ip: string): Promise<Login[]> {
     return await this.loginRepository.getSteamId64FromIp(ip);
   }
-
-  findOne(id: string): Promise<Login> {
-    return this.loginRepository.findOne(id);
-  }
 }

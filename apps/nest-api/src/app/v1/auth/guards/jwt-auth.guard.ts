@@ -21,8 +21,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') implements CanActivate {
 
     const roles =
       this.reflector.getAllAndMerge<UserRole[]>('roles', [
-        executionContext.getClass(), // whole controller
-        executionContext.getHandler(), // only requests/paths
+        executionContext.getClass(), // Whole controller
+        executionContext.getHandler(), // Only requests/paths
       ]) || [];
     if (!roles.length) return true;
 
