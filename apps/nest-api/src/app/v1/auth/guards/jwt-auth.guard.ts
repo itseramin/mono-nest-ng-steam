@@ -30,4 +30,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') implements CanActivate {
       return role === user.role;
     });
   }
+
+  // handleRequest(err, user, info: Error) {
+  //   // TODO: custom 401 error when unauthenticated
+  //   return user;
+  // }
 }
